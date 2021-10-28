@@ -10,6 +10,7 @@ import SwiftUI
 struct HeroView: View {
     //MARK: - Properties
     @StateObject var movieViewModel = MovieViewModel()
+    @State private var heartStatus: Bool = false
     
     
     //MARK: - Body
@@ -36,10 +37,10 @@ struct HeroView: View {
                     
                     Spacer()
                     
-                    Image(systemName: "suit.heart.fill")
+                    Image(systemName: heartStatus ? "suit.heart.fill" : "suit.heart")
                         .foregroundColor(.white)
                         .onTapGesture {
-                            print("coracao")
+                            heartStatus = !heartStatus
                         }
                 }//: HStack
                 .padding(.horizontal, 10)
@@ -75,9 +76,9 @@ struct HeroView: View {
                 }//: HStack
                 .padding(.horizontal, 10)
             }//: VStack
+            .padding(.bottom, 10)
             .background(Color("SemiBlack"))
         }//: Group
-        .padding(.bottom, 10)
         .onAppear {
             movieViewModel.searchMovie()
         }
